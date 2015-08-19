@@ -12,6 +12,7 @@
   "url": "https://github.com/swanitzek/BigRedButton/issues"
 },
   "dependencies": {
-    "express": "4.13.x"
+    "express": "4.13.x",
+    "node-gcm": "0.11.x"
   }
 }
