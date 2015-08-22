@@ -31,11 +31,15 @@ app.get('/ring', function (req, res) {
   {
     res.send('Id not set!');
   } else {
-    var message = new gcm.Message();
+    var message = new gcm.Message(
+{
+		priority: 10,
+		timeToLive: 0
+}
+	);
 
     // ... or some given values
     var message = new gcm.Message({
-		    contentAvailable: true,
 		    delayWhileIdle: false,
     });
 
