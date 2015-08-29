@@ -1,10 +1,14 @@
 // a simple variable will store the GCM-ID for now, will be replaced with a database in the future
 var tempGcmId = null;
 
+var bodyParser = require('body-parser')
 var express = require('express');
 var app = express();
 var gcm = require('node-gcm');
 var config = require('./config');
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // print the current GCM-Id to the browser
 app.get('/', function(req, res) {
@@ -37,7 +41,7 @@ app.post('/ring', function(req, res) {
         return;
     }
 
-    if (req.param('secret') != config.auth.secret)
+    if (req.body.secret != config.auth.secret)
     {
     	res.statusCode = 403;
     	res.send('The parameter "secret" contains either none or an invalid secret. The alarm is not fired because the authentification failed.');
@@ -81,4 +85,4 @@ app.post('/ring', function(req, res) {
 });
 
 // TODO => create a config file to configure server-port etc.
-app.listen(config.port)
+app.listen(config.port);
