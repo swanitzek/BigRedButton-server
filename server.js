@@ -21,11 +21,18 @@ app.get('/', function(req, res) {
 });
 
 // set the current GCM-ID (will override the old one) 
-app.get('/setGcmId', function(req, res) {
-    var id = req.param('id');
-    tempGcmId = id;
+app.post('/setGcmId', function(req, res) {
+    if (req.body.secret != config.auth.secret)
+    {
+    	res.statusCode = 403;
+    	res.send('The parameter "secret" contains either none or an invalid secret. The GCM-id was not set because the authentification failed.');
 
-    res.send('Id set: ' + id);
+    	return;
+    }
+
+    tempGcmId = req.body.gcmId;
+
+    res.send('Id set: ' + tempGcmId);
 });
 
 
