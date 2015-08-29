@@ -33,7 +33,7 @@ app.post('/ring', function(req, res) {
     	 // internal server error
     	res.statusCode = 500;
         res.send('Id not set!');
-        
+
         return;
     }
 
@@ -42,7 +42,7 @@ app.post('/ring', function(req, res) {
     	res.statusCode = 403;
     	res.send('The parameter "secret" contains either none or an invalid secret. The alarm is not fired because the authentification failed.');
 
-    	return:
+    	return;
     }
 
     // Preparing the GCM message which will be delivered to the device via Google Servers
